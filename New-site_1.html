@@ -1,1243 +1,1243 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8" />
-<title>Front End Simplified | Coding Made Easy</title>
-<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<style>
-:root {
---bg: #05060a;
---bg-alt: #0b0d16;
---accent: #00ff88;
---accent-soft: rgba(0, 255, 136, 0.12);
---accent-blue: #00c8ff;
---text-main: #f9fafb;
---text-muted: #9ca3af;
---card-bg: #0f172a;
---border-subtle: #1f2933;
---radius-lg: 18px;
---radius-md: 12px;
---shadow-soft: 0 18px 45px rgba(0, 0, 0, 0.65);
---shadow-glow: 0 0 40px rgba(0, 255, 136, 0.25);
---font-main: system-ui, -apple-system, BlinkMacSystemFont, "SF Pro Text",
-"Segoe UI", sans-serif;
-}
-
-* {
-box-sizing: border-box;
-margin: 0;
-padding: 0;
-}
-
-body {
-font-family: var(--font-main);
-background: radial-gradient(circle at top, #111827 0, #020617 45%, #000 100%);
-color: var(--text-main);
-min-height: 100vh;
-line-height: 1.6;
-overflow-x: hidden;
-}
-
-.code-bg {
-position: fixed;
-inset: 0;
-pointer-events: none;
-z-index: -2;
-background-image: linear-gradient(
-rgba(15, 23, 42, 0.9),
-rgba(15, 23, 42, 0.98)
-),
-radial-gradient(circle at 10% 20%, rgba(0, 255, 136, 0.12) 0, transparent 55%),
-radial-gradient(circle at 80% 0%, rgba(0, 200, 255, 0.12) 0, transparent 55%);
-}
-
-.code-rain {
-position: fixed;
-inset: 0;
-pointer-events: none;
-z-index: -1;
-opacity: 0.18;
-background-image: linear-gradient(
-to bottom,
-rgba(0, 255, 136, 0.15) 1px,
-transparent 1px
-);
-background-size: 2px 18px;
-animation: rain 18s linear infinite;
-mix-blend-mode: screen;
-}
-
-@keyframes rain {
-from {
-transform: translateY(-100px);
-}
-to {
-transform: translateY(100px);
-}
-}
-
-header {
-position: sticky;
-top: 0;
-z-index: 20;
-backdrop-filter: blur(18px);
-background: linear-gradient(
-to bottom,
-rgba(2, 6, 23, 0.9),
-rgba(2, 6, 23, 0.6),
-transparent
-);
-border-bottom: 1px solid rgba(148, 163, 184, 0.15);
-}
-
-.nav {
-max-width: 1120px;
-margin: 0 auto;
-padding: 14px 20px;
-display: flex;
-align-items: center;
-justify-content: space-between;
-gap: 16px;
-}
-
-.logo {
-display: flex;
-align-items: center;
-gap: 10px;
-}
-
-.logo-mark {
-width: 32px;
-height: 32px;
-border-radius: 10px;
-background: radial-gradient(circle at 30% 0, #00c8ff, #00ff88);
-box-shadow: var(--shadow-glow);
-display: flex;
-align-items: center;
-justify-content: center;
-font-size: 18px;
-font-weight: 800;
-color: #020617;
-}
-
-.logo-text {
-display: flex;
-flex-direction: column;
-font-size: 14px;
-}
-
-.logo-text span:first-child {
-font-weight: 700;
-letter-spacing: 0.06em;
-text-transform: uppercase;
-font-size: 11px;
-color: var(--accent-blue);
-}
-
-.logo-text span:last-child {
-font-weight: 600;
-}
-
-.nav-links {
-display: flex;
-gap: 18px;
-font-size: 14px;
-}
-
-.nav-links a {
-color: var(--text-muted);
-text-decoration: none;
-position: relative;
-padding-bottom: 2px;
-}
-
-.nav-links a::after {
-content: "";
-position: absolute;
-left: 0;
-bottom: 0;
-width: 0;
-height: 2px;
-background: linear-gradient(to right, var(--accent), var(--accent-blue));
-transition: width 0.2s ease-out;
-}
-
-.nav-links a:hover::after {
-width: 100%;
-}
-
-.nav-cta {
-display: flex;
-gap: 10px;
-align-items: center;
-}
-
-.btn {
-border-radius: 999px;
-padding: 8px 18px;
-font-size: 13px;
-border: 1px solid transparent;
-cursor: pointer;
-transition: all 0.18s ease-out;
-display: inline-flex;
-align-items: center;
-gap: 8px;
-text-decoration: none;
-white-space: nowrap;
-}
-
-.btn-primary {
-background: linear-gradient(135deg, var(--accent), var(--accent-blue));
-color: #020617;
-font-weight: 600;
-box-shadow: var(--shadow-glow);
-}
-
-.btn-primary:hover {
-transform: translateY(-1px);
-box-shadow: 0 20px 40px rgba(0, 255, 136, 0.35);
-}
-
-.btn-ghost {
-background: rgba(15, 23, 42, 0.7);
-color: var(--text-muted);
-border-color: rgba(148, 163, 184, 0.4);
-}
-
-.btn-ghost:hover {
-border-color: var(--accent);
-color: var(--accent);
-background: rgba(15, 23, 42, 0.9);
-}
-
-main {
-max-width: 1120px;
-margin: 0 auto;
-padding: 32px 20px 80px;
-}
-
-.hero {
-display: grid;
-grid-template-columns: minmax(0, 1.2fr) minmax(0, 1fr);
-gap: 40px;
-align-items: center;
-padding: 40px 0 32px;
-}
-
-.hero-kicker {
-display: inline-flex;
-align-items: center;
-gap: 8px;
-padding: 4px 10px 4px 4px;
-border-radius: 999px;
-background: rgba(15, 23, 42, 0.9);
-border: 1px solid rgba(148, 163, 184, 0.4);
-margin-bottom: 16px;
-font-size: 11px;
-text-transform: uppercase;
-letter-spacing: 0.12em;
-color: var(--text-muted);
-}
-
-.hero-kicker-pill {
-padding: 4px 10px;
-border-radius: 999px;
-background: var(--accent-soft);
-color: var(--accent);
-font-weight: 600;
-}
-
-.hero-title {
-font-size: clamp(2.4rem, 4vw, 3.1rem);
-line-height: 1.1;
-margin-bottom: 14px;
-}
-
-.hero-title span {
-background: linear-gradient(135deg, var(--accent), var(--accent-blue));
--webkit-background-clip: text;
-color: transparent;
-}
-
-.hero-subtitle {
-font-size: 15px;
-color: var(--text-muted);
-max-width: 480px;
-margin-bottom: 20px;
-}
-
-.hero-badges {
-display: flex;
-flex-wrap: wrap;
-gap: 10px;
-margin-bottom: 22px;
-}
-
-.hero-badge {
-font-size: 11px;
-padding: 6px 10px;
-border-radius: 999px;
-border: 1px solid rgba(148, 163, 184, 0.4);
-color: var(--text-muted);
-background: rgba(15, 23, 42, 0.9);
-}
-
-.hero-actions {
-display: flex;
-flex-wrap: wrap;
-gap: 10px;
-align-items: center;
-margin-bottom: 16px;
-}
-
-.hero-note {
-font-size: 12px;
-color: var(--text-muted);
-}
-
-.hero-note span {
-color: var(--accent);
-font-weight: 500;
-}
-
-.hero-right {
-position: relative;
-}
-
-.hero-card {
-background: radial-gradient(circle at top left, #111827, #020617);
-border-radius: 22px;
-padding: 18px 18px 16px;
-border: 1px solid rgba(148, 163, 184, 0.35);
-box-shadow: var(--shadow-soft);
-position: relative;
-overflow: hidden;
-}
-
-.hero-card-header {
-display: flex;
-justify-content: space-between;
-align-items: center;
-margin-bottom: 10px;
-font-size: 11px;
-color: var(--text-muted);
-}
-
-.hero-dots {
-display: flex;
-gap: 6px;
-}
-
-.hero-dot {
-width: 8px;
-height: 8px;
-border-radius: 999px;
-background: #ef4444;
-}
-
-.hero-dot:nth-child(2) {
-background: #facc15;
-}
-
-.hero-dot:nth-child(3) {
-background: #22c55e;
-}
-
-.hero-terminal {
-font-family: "SF Mono", ui-monospace, Menlo, Monaco, Consolas, "Liberation Mono",
-"Courier New", monospace;
-font-size: 11px;
-background: #020617;
-border-radius: 14px;
-padding: 12px 12px 10px;
-border: 1px solid rgba(15, 23, 42, 0.9);
-color: #e5e7eb;
-position: relative;
-overflow: hidden;
-}
-
-.hero-terminal-line {
-margin-bottom: 4px;
-white-space: nowrap;
-overflow: hidden;
-text-overflow: ellipsis;
-}
-
-.hero-terminal-line span.prompt {
-color: var(--accent);
-}
-
-.hero-terminal-line span.path {
-color: var(--accent-blue);
-}
-
-.hero-terminal-line span.cmd {
-color: #e5e7eb;
-}
-
-.hero-terminal-line span.output {
-color: var(--text-muted);
-}
-
-.cursor {
-display: inline-block;
-width: 7px;
-height: 11px;
-background: var(--accent);
-margin-left: 2px;
-animation: blink 1s steps(1) infinite;
-}
-
-@keyframes blink {
-0%,
-50% {
-opacity: 1;
-}
-50.01%,
-100% {
-opacity: 0;
-}
-}
-
-.hero-floating-tag {
-position: absolute;
-right: -4px;
-top: 50%;
-transform: translateY(-50%);
-background: rgba(15, 23, 42, 0.96);
-border-radius: 999px;
-padding: 8px 12px;
-border: 1px solid rgba(148, 163, 184, 0.5);
-font-size: 11px;
-color: var(--text-muted);
-display: flex;
-align-items: center;
-gap: 6px;
-box-shadow: var(--shadow-soft);
-}
-
-.hero-floating-tag span.icon {
-width: 18px;
-height: 18px;
-border-radius: 999px;
-background: var(--accent-soft);
-display: inline-flex;
-align-items: center;
-justify-content: center;
-color: var(--accent);
-font-size: 12px;
-}
-
-section {
-margin-top: 40px;
-}
-
-.section-label {
-font-size: 11px;
-text-transform: uppercase;
-letter-spacing: 0.16em;
-color: var(--accent-blue);
-margin-bottom: 6px;
-}
-
-.section-title {
-font-size: 22px;
-margin-bottom: 8px;
-}
-
-.section-subtitle {
-font-size: 14px;
-color: var(--text-muted);
-max-width: 520px;
-margin-bottom: 18px;
-}
-
-.grid-3 {
-display: grid;
-grid-template-columns: repeat(3, minmax(0, 1fr));
-gap: 16px;
-}
-
-.grid-2 {
-display: grid;
-grid-template-columns: repeat(2, minmax(0, 1fr));
-gap: 18px;
-}
-
-.card {
-background: rgba(15, 23, 42, 0.96);
-border-radius: var(--radius-md);
-border: 1px solid var(--border-subtle);
-padding: 14px 14px 12px;
-box-shadow: 0 14px 30px rgba(0, 0, 0, 0.6);
-}
-
-.card-header {
-display: flex;
-align-items: center;
-gap: 10px;
-margin-bottom: 6px;
-}
-
-.card-icon {
-width: 26px;
-height: 26px;
-border-radius: 999px;
-background: rgba(15, 118, 110, 0.2);
-display: flex;
-align-items: center;
-justify-content: center;
-font-size: 14px;
-}
-
-.card-title {
-font-size: 14px;
-font-weight: 600;
-}
-
-.card-body {
-font-size: 13px;
-color: var(--text-muted);
-}
-
-.pill {
-display: inline-flex;
-align-items: center;
-gap: 6px;
-font-size: 11px;
-padding: 4px 8px;
-border-radius: 999px;
-background: rgba(15, 23, 42, 0.9);
-border: 1px solid rgba(148, 163, 184, 0.4);
-color: var(--text-muted);
-}
-
-.pill-dot {
-width: 7px;
-height: 7px;
-border-radius: 999px;
-background: var(--accent);
-}
-
-.steps {
-display: grid;
-grid-template-columns: repeat(3, minmax(0, 1fr));
-gap: 14px;
-margin-top: 10px;
-}
-
-.step {
-background: rgba(15, 23, 42, 0.96);
-border-radius: var(--radius-md);
-border: 1px solid var(--border-subtle);
-padding: 12px 12px 10px;
-font-size: 13px;
-color: var(--text-muted);
-}
-
-.step-number {
-font-size: 11px;
-text-transform: uppercase;
-letter-spacing: 0.16em;
-color: var(--accent-blue);
-margin-bottom: 4px;
-}
-
-.step-title {
-font-size: 14px;
-font-weight: 600;
-margin-bottom: 4px;
-color: var(--text-main);
-}
-
-.tag-row {
-display: flex;
-flex-wrap: wrap;
-gap: 6px;
-margin-top: 6px;
-}
-
-.tag {
-font-size: 11px;
-padding: 4px 8px;
-border-radius: 999px;
-background: rgba(15, 23, 42, 0.9);
-border: 1px solid rgba(148, 163, 184, 0.4);
-color: var(--text-muted);
-}
-
-.testimonials {
-display: grid;
-grid-template-columns: repeat(3, minmax(0, 1fr));
-gap: 14px;
-margin-top: 10px;
-}
-
-.testimonial {
-background: rgba(15, 23, 42, 0.96);
-border-radius: var(--radius-md);
-border: 1px solid var(--border-subtle);
-padding: 12px 12px 10px;
-font-size: 13px;
-color: var(--text-muted);
-}
-
-.testimonial-name {
-font-size: 13px;
-font-weight: 600;
-margin-bottom: 2px;
-color: var(--text-main);
-}
-
-.testimonial-role {
-font-size: 11px;
-color: var(--accent-blue);
-margin-bottom: 6px;
-}
-
-.testimonial-tag {
-font-size: 11px;
-color: var(--accent);
-margin-top: 6px;
-}
-
-.curriculum-grid {
-display: grid;
-grid-template-columns: repeat(3, minmax(0, 1fr));
-gap: 12px;
-margin-top: 10px;
-}
-
-.curriculum-item {
-background: rgba(15, 23, 42, 0.96);
-border-radius: var(--radius-md);
-border: 1px solid var(--border-subtle);
-padding: 10px 10px 8px;
-font-size: 12px;
-color: var(--text-muted);
-}
-
-.curriculum-title {
-font-size: 13px;
-font-weight: 600;
-margin-bottom: 4px;
-color: var(--text-main);
-}
-
-.cta-section {
-margin-top: 40px;
-padding: 20px 16px 18px;
-border-radius: var(--radius-lg);
-background: radial-gradient(circle at top left, #111827, #020617);
-border: 1px solid rgba(148, 163, 184, 0.4);
-box-shadow: var(--shadow-soft);
-text-align: center;
-}
-
-.cta-title {
-font-size: 22px;
-margin-bottom: 6px;
-}
-
-.cta-subtitle {
-font-size: 14px;
-color: var(--text-muted);
-margin-bottom: 16px;
-}
-
-.cta-actions {
-display: flex;
-flex-wrap: wrap;
-justify-content: center;
-gap: 10px;
-margin-bottom: 10px;
-}
-
-.cta-note {
-font-size: 12px;
-color: var(--text-muted);
-}
-
-footer {
-max-width: 1120px;
-margin: 0 auto;
-padding: 20px;
-font-size: 11px;
-color: var(--text-muted);
-display: flex;
-justify-content: space-between;
-gap: 10px;
-border-top: 1px solid rgba(15, 23, 42, 0.9);
-margin-top: 20px;
-}
-
-footer a {
-color: var(--accent-blue);
-text-decoration: none;
-}
-
-.success-popup {
-position: fixed;
-top: 50%;
-left: 50%;
-transform: translate(-50%, -50%) scale(0.8);
-background: rgba(15, 23, 42, 0.95);
-padding: 24px 32px;
-border-radius: 16px;
-border: 1px solid rgba(0, 255, 136, 0.4);
-box-shadow: 0 0 40px rgba(0, 255, 136, 0.25);
-text-align: center;
-opacity: 0;
-pointer-events: none;
-transition: all 0.35s ease-out;
-z-index: 9999;
-}
-
-.success-popup.show {
-opacity: 1;
-transform: translate(-50%, -50%) scale(1);
-pointer-events: auto;
-}
-
-.success-checkmark {
-width: 60px;
-height: 60px;
-border-radius: 50%;
-border: 3px solid var(--accent);
-display: flex;
-align-items: center;
-justify-content: center;
-margin: 0 auto 10px;
-animation: pop 0.4s ease-out;
-}
-
-.check-icon {
-width: 28px;
-height: 14px;
-border-left: 3px solid var(--accent);
-border-bottom: 3px solid var(--accent);
-transform: rotate(-45deg);
-animation: draw 0.4s ease-out 0.2s forwards;
-opacity: 0;
-}
-
-@keyframes pop {
-0% { transform: scale(0.4); opacity: 0; }
-100% { transform: scale(1); opacity: 1; }
-}
-
-@keyframes draw {
-0% { opacity: 0; transform: rotate(-45deg) scale(0.6); }
-100% { opacity: 1; transform: rotate(-45deg) scale(1); }
-}
-
-input, select, textarea {
-background: #020617;
-border: 1px solid rgba(148, 163, 184, 0.4);
-color: var(--text-main);
-outline: none;
-}
-
-input:focus, select:focus, textarea:focus {
-border-color: var(--accent);
-box-shadow: 0 0 0 1px rgba(0, 255, 136, 0.3);
-}
-
-@media (max-width: 900px) {
-.hero {
-grid-template-columns: minmax(0, 1fr);
-}
-
-.hero-right {
-order: -1;
-}
-
-.grid-3,
-.steps,
-.testimonials,
-.curriculum-grid {
-grid-template-columns: repeat(2, minmax(0, 1fr));
-}
-}
-
-@media (max-width: 640px) {
-.nav-links {
-display: none;
-}
-
-.hero {
-padding-top: 24px;
-}
-
-.grid-3,
-.steps,
-.testimonials,
-.curriculum-grid,
-.grid-2 {
-grid-template-columns: minmax(0, 1fr);
-}
-
-footer {
-flex-direction: column;
-align-items: flex-start;
-}
-}
-</style>
+  <meta charset="UTF-8" />
+  <title>Front End Simplified | Coding Made Easy</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <style>
+    :root {
+      --bg: #05060a;
+      --bg-alt: #0b0d16;
+      --accent: #00ff88;
+      --accent-soft: rgba(0, 255, 136, 0.12);
+      --accent-blue: #00c8ff;
+      --text-main: #f9fafb;
+      --text-muted: #9ca3af;
+      --card-bg: #0f172a;
+      --border-subtle: #1f2933;
+      --radius-lg: 18px;
+      --radius-md: 12px;
+      --shadow-soft: 0 18px 45px rgba(0, 0, 0, 0.65);
+      --shadow-glow: 0 0 40px rgba(0, 255, 136, 0.25);
+      --font-main: system-ui, -apple-system, BlinkMacSystemFont, "SF Pro Text",
+        "Segoe UI", sans-serif;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: var(--font-main);
+      background: radial-gradient(circle at top, #111827 0, #020617 45%, #000 100%);
+      color: var(--text-main);
+      min-height: 100vh;
+      line-height: 1.6;
+      overflow-x: hidden;
+    }
+
+    .code-bg {
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      z-index: -2;
+      background-image: linear-gradient(
+          rgba(15, 23, 42, 0.9),
+          rgba(15, 23, 42, 0.98)
+        ),
+        radial-gradient(circle at 10% 20%, rgba(0, 255, 136, 0.12) 0, transparent 55%),
+        radial-gradient(circle at 80% 0%, rgba(0, 200, 255, 0.12) 0, transparent 55%);
+    }
+
+    .code-rain {
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      z-index: -1;
+      opacity: 0.18;
+      background-image: linear-gradient(
+        to bottom,
+        rgba(0, 255, 136, 0.15) 1px,
+        transparent 1px
+      );
+      background-size: 2px 18px;
+      animation: rain 18s linear infinite;
+      mix-blend-mode: screen;
+    }
+
+    @keyframes rain {
+      from {
+        transform: translateY(-100px);
+      }
+      to {
+        transform: translateY(100px);
+      }
+    }
+
+    header {
+      position: sticky;
+      top: 0;
+      z-index: 20;
+      backdrop-filter: blur(18px);
+      background: linear-gradient(
+        to bottom,
+        rgba(2, 6, 23, 0.9),
+        rgba(2, 6, 23, 0.6),
+        transparent
+      );
+      border-bottom: 1px solid rgba(148, 163, 184, 0.15);
+    }
+
+    .nav {
+      max-width: 1120px;
+      margin: 0 auto;
+      padding: 14px 20px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+    }
+
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .logo-mark {
+      width: 32px;
+      height: 32px;
+      border-radius: 10px;
+      background: radial-gradient(circle at 30% 0, #00c8ff, #00ff88);
+      box-shadow: var(--shadow-glow);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 18px;
+      font-weight: 800;
+      color: #020617;
+    }
+
+    .logo-text {
+      display: flex;
+      flex-direction: column;
+      font-size: 14px;
+    }
+
+    .logo-text span:first-child {
+      font-weight: 700;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      font-size: 11px;
+      color: var(--accent-blue);
+    }
+
+    .logo-text span:last-child {
+      font-weight: 600;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 18px;
+      font-size: 14px;
+    }
+
+    .nav-links a {
+      color: var(--text-muted);
+      text-decoration: none;
+      position: relative;
+      padding-bottom: 2px;
+    }
+
+    .nav-links a::after {
+      content: "";
+      position: absolute;
+      left: 0;
+      bottom: 0;
+      width: 0;
+      height: 2px;
+      background: linear-gradient(to right, var(--accent), var(--accent-blue));
+      transition: width 0.2s ease-out;
+    }
+
+    .nav-links a:hover::after {
+      width: 100%;
+    }
+
+    .nav-cta {
+      display: flex;
+      gap: 10px;
+      align-items: center;
+    }
+
+    .btn {
+      border-radius: 999px;
+      padding: 8px 18px;
+      font-size: 13px;
+      border: 1px solid transparent;
+      cursor: pointer;
+      transition: all 0.18s ease-out;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      text-decoration: none;
+      white-space: nowrap;
+    }
+
+    .btn-primary {
+      background: linear-gradient(135deg, var(--accent), var(--accent-blue));
+      color: #020617;
+      font-weight: 600;
+      box-shadow: var(--shadow-glow);
+    }
+
+    .btn-primary:hover {
+      transform: translateY(-1px);
+      box-shadow: 0 20px 40px rgba(0, 255, 136, 0.35);
+    }
+
+    .btn-ghost {
+      background: rgba(15, 23, 42, 0.7);
+      color: var(--text-muted);
+      border-color: rgba(148, 163, 184, 0.4);
+    }
+
+    .btn-ghost:hover {
+      border-color: var(--accent);
+      color: var(--accent);
+      background: rgba(15, 23, 42, 0.9);
+    }
+
+    main {
+      max-width: 1120px;
+      margin: 0 auto;
+      padding: 32px 20px 80px;
+    }
+
+    .hero {
+      display: grid;
+      grid-template-columns: minmax(0, 1.2fr) minmax(0, 1fr);
+      gap: 40px;
+      align-items: center;
+      padding: 40px 0 32px;
+    }
+
+    .hero-kicker {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 4px 10px 4px 4px;
+      border-radius: 999px;
+      background: rgba(15, 23, 42, 0.9);
+      border: 1px solid rgba(148, 163, 184, 0.4);
+      margin-bottom: 16px;
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      color: var(--text-muted);
+    }
+
+    .hero-kicker-pill {
+      padding: 4px 10px;
+      border-radius: 999px;
+      background: var(--accent-soft);
+      color: var(--accent);
+      font-weight: 600;
+    }
+
+    .hero-title {
+      font-size: clamp(2.4rem, 4vw, 3.1rem);
+      line-height: 1.1;
+      margin-bottom: 14px;
+    }
+
+    .hero-title span {
+      background: linear-gradient(135deg, var(--accent), var(--accent-blue));
+      -webkit-background-clip: text;
+      color: transparent;
+    }
+
+    .hero-subtitle {
+      font-size: 15px;
+      color: var(--text-muted);
+      max-width: 480px;
+      margin-bottom: 20px;
+    }
+
+    .hero-badges {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-bottom: 22px;
+    }
+
+    .hero-badge {
+      font-size: 11px;
+      padding: 6px 10px;
+      border-radius: 999px;
+      border: 1px solid rgba(148, 163, 184, 0.4);
+      color: var(--text-muted);
+      background: rgba(15, 23, 42, 0.9);
+    }
+
+    .hero-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      align-items: center;
+      margin-bottom: 16px;
+    }
+
+    .hero-note {
+      font-size: 12px;
+      color: var(--text-muted);
+    }
+
+    .hero-note span {
+      color: var(--accent);
+      font-weight: 500;
+    }
+
+    .hero-right {
+      position: relative;
+    }
+
+    .hero-card {
+      background: radial-gradient(circle at top left, #111827, #020617);
+      border-radius: 22px;
+      padding: 18px 18px 16px;
+      border: 1px solid rgba(148, 163, 184, 0.35);
+      box-shadow: var(--shadow-soft);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero-card-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 10px;
+      font-size: 11px;
+      color: var(--text-muted);
+    }
+
+    .hero-dots {
+      display: flex;
+      gap: 6px;
+    }
+
+    .hero-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 999px;
+      background: #ef4444;
+    }
+
+    .hero-dot:nth-child(2) {
+      background: #facc15;
+    }
+
+    .hero-dot:nth-child(3) {
+      background: #22c55e;
+    }
+
+    .hero-terminal {
+      font-family: "SF Mono", ui-monospace, Menlo, Monaco, Consolas, "Liberation Mono",
+        "Courier New", monospace;
+      font-size: 11px;
+      background: #020617;
+      border-radius: 14px;
+      padding: 12px 12px 10px;
+      border: 1px solid rgba(15, 23, 42, 0.9);
+      color: #e5e7eb;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero-terminal-line {
+      margin-bottom: 4px;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    .hero-terminal-line span.prompt {
+      color: var(--accent);
+    }
+
+    .hero-terminal-line span.path {
+      color: var(--accent-blue);
+    }
+
+    .hero-terminal-line span.cmd {
+      color: #e5e7eb;
+    }
+
+    .hero-terminal-line span.output {
+      color: var(--text-muted);
+    }
+
+    .cursor {
+      display: inline-block;
+      width: 7px;
+      height: 11px;
+      background: var(--accent);
+      margin-left: 2px;
+      animation: blink 1s steps(1) infinite;
+    }
+
+    @keyframes blink {
+      0%,
+      50% {
+        opacity: 1;
+      }
+      50.01%,
+      100% {
+        opacity: 0;
+      }
+    }
+
+    .hero-floating-tag {
+      position: absolute;
+      right: -4px;
+      top: 50%;
+      transform: translateY(-50%);
+      background: rgba(15, 23, 42, 0.96);
+      border-radius: 999px;
+      padding: 8px 12px;
+      border: 1px solid rgba(148, 163, 184, 0.5);
+      font-size: 11px;
+      color: var(--text-muted);
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      box-shadow: var(--shadow-soft);
+    }
+
+    .hero-floating-tag span.icon {
+      width: 18px;
+      height: 18px;
+      border-radius: 999px;
+      background: var(--accent-soft);
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--accent);
+      font-size: 12px;
+    }
+
+    section {
+      margin-top: 40px;
+    }
+
+    .section-label {
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: 0.16em;
+      color: var(--accent-blue);
+      margin-bottom: 6px;
+    }
+
+    .section-title {
+      font-size: 22px;
+      margin-bottom: 8px;
+    }
+
+    .section-subtitle {
+      font-size: 14px;
+      color: var(--text-muted);
+      max-width: 520px;
+      margin-bottom: 18px;
+    }
+
+    .grid-3 {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 16px;
+    }
+
+    .grid-2 {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 18px;
+    }
+
+    .card {
+      background: rgba(15, 23, 42, 0.96);
+      border-radius: var(--radius-md);
+      border: 1px solid var(--border-subtle);
+      padding: 14px 14px 12px;
+      box-shadow: 0 14px 30px rgba(0, 0, 0, 0.6);
+    }
+
+    .card-header {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 6px;
+    }
+
+    .card-icon {
+      width: 26px;
+      height: 26px;
+      border-radius: 999px;
+      background: rgba(15, 118, 110, 0.2);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 14px;
+    }
+
+    .card-title {
+      font-size: 14px;
+      font-weight: 600;
+    }
+
+    .card-body {
+      font-size: 13px;
+      color: var(--text-muted);
+    }
+
+    .pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 11px;
+      padding: 4px 8px;
+      border-radius: 999px;
+      background: rgba(15, 23, 42, 0.9);
+      border: 1px solid rgba(148, 163, 184, 0.4);
+      color: var(--text-muted);
+    }
+
+    .pill-dot {
+      width: 7px;
+      height: 7px;
+      border-radius: 999px;
+      background: var(--accent);
+    }
+
+    .steps {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 14px;
+      margin-top: 10px;
+    }
+
+    .step {
+      background: rgba(15, 23, 42, 0.96);
+      border-radius: var(--radius-md);
+      border: 1px solid var(--border-subtle);
+      padding: 12px 12px 10px;
+      font-size: 13px;
+      color: var(--text-muted);
+    }
+
+    .step-number {
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: 0.16em;
+      color: var(--accent-blue);
+      margin-bottom: 4px;
+    }
+
+    .step-title {
+      font-size: 14px;
+      font-weight: 600;
+      margin-bottom: 4px;
+      color: var(--text-main);
+    }
+
+    .tag-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+      margin-top: 6px;
+    }
+
+    .tag {
+      font-size: 11px;
+      padding: 4px 8px;
+      border-radius: 999px;
+      background: rgba(15, 23, 42, 0.9);
+      border: 1px solid rgba(148, 163, 184, 0.4);
+      color: var(--text-muted);
+    }
+
+    .testimonials {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 14px;
+      margin-top: 10px;
+    }
+
+    .testimonial {
+      background: rgba(15, 23, 42, 0.96);
+      border-radius: var(--radius-md);
+      border: 1px solid var(--border-subtle);
+      padding: 12px 12px 10px;
+      font-size: 13px;
+      color: var(--text-muted);
+    }
+
+    .testimonial-name {
+      font-size: 13px;
+      font-weight: 600;
+      margin-bottom: 2px;
+      color: var(--text-main);
+    }
+
+    .testimonial-role {
+      font-size: 11px;
+      color: var(--accent-blue);
+      margin-bottom: 6px;
+    }
+
+    .testimonial-tag {
+      font-size: 11px;
+      color: var(--accent);
+      margin-top: 6px;
+    }
+
+    .curriculum-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 12px;
+      margin-top: 10px;
+    }
+
+    .curriculum-item {
+      background: rgba(15, 23, 42, 0.96);
+      border-radius: var(--radius-md);
+      border: 1px solid var(--border-subtle);
+      padding: 10px 10px 8px;
+      font-size: 12px;
+      color: var(--text-muted);
+    }
+
+    .curriculum-title {
+      font-size: 13px;
+      font-weight: 600;
+      margin-bottom: 4px;
+      color: var(--text-main);
+    }
+
+    .cta-section {
+      margin-top: 40px;
+      padding: 20px 16px 18px;
+      border-radius: var(--radius-lg);
+      background: radial-gradient(circle at top left, #111827, #020617);
+      border: 1px solid rgba(148, 163, 184, 0.4);
+      box-shadow: var(--shadow-soft);
+      text-align: center;
+    }
+
+    .cta-title {
+      font-size: 22px;
+      margin-bottom: 6px;
+    }
+
+    .cta-subtitle {
+      font-size: 14px;
+      color: var(--text-muted);
+      margin-bottom: 16px;
+    }
+
+    .cta-actions {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 10px;
+      margin-bottom: 10px;
+    }
+
+    .cta-note {
+      font-size: 12px;
+      color: var(--text-muted);
+    }
+
+    footer {
+      max-width: 1120px;
+      margin: 0 auto;
+      padding: 20px;
+      font-size: 11px;
+      color: var(--text-muted);
+      display: flex;
+      justify-content: space-between;
+      gap: 10px;
+      border-top: 1px solid rgba(15, 23, 42, 0.9);
+      margin-top: 20px;
+    }
+
+    footer a {
+      color: var(--accent-blue);
+      text-decoration: none;
+    }
+
+    .success-popup {
+      position: fixed;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%) scale(0.8);
+      background: rgba(15, 23, 42, 0.95);
+      padding: 24px 32px;
+      border-radius: 16px;
+      border: 1px solid rgba(0, 255, 136, 0.4);
+      box-shadow: 0 0 40px rgba(0, 255, 136, 0.25);
+      text-align: center;
+      opacity: 0;
+      pointer-events: none;
+      transition: all 0.35s ease-out;
+      z-index: 9999;
+    }
+
+    .success-popup.show {
+      opacity: 1;
+      transform: translate(-50%, -50%) scale(1);
+      pointer-events: auto;
+    }
+
+    .success-checkmark {
+      width: 60px;
+      height: 60px;
+      border-radius: 50%;
+      border: 3px solid var(--accent);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 0 auto 10px;
+      animation: pop 0.4s ease-out;
+    }
+
+    .check-icon {
+      width: 28px;
+      height: 14px;
+      border-left: 3px solid var(--accent);
+      border-bottom: 3px solid var(--accent);
+      transform: rotate(-45deg);
+      animation: draw 0.4s ease-out 0.2s forwards;
+      opacity: 0;
+    }
+
+    @keyframes pop {
+      0% { transform: scale(0.4); opacity: 0; }
+      100% { transform: scale(1); opacity: 1; }
+    }
+
+    @keyframes draw {
+      0% { opacity: 0; transform: rotate(-45deg) scale(0.6); }
+      100% { opacity: 1; transform: rotate(-45deg) scale(1); }
+    }
+
+    input, select, textarea {
+      background: #020617;
+      border: 1px solid rgba(148, 163, 184, 0.4);
+      color: var(--text-main);
+      outline: none;
+    }
+
+    input:focus, select:focus, textarea:focus {
+      border-color: var(--accent);
+      box-shadow: 0 0 0 1px rgba(0, 255, 136, 0.3);
+    }
+
+    @media (max-width: 900px) {
+      .hero {
+        grid-template-columns: minmax(0, 1fr);
+      }
+
+      .hero-right {
+        order: -1;
+      }
+
+      .grid-3,
+      .steps,
+      .testimonials,
+      .curriculum-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+    }
+
+    @media (max-width: 640px) {
+      .nav-links {
+        display: none;
+      }
+
+      .hero {
+        padding-top: 24px;
+      }
+
+      .grid-3,
+      .steps,
+      .testimonials,
+      .curriculum-grid,
+      .grid-2 {
+        grid-template-columns: minmax(0, 1fr);
+      }
+
+      footer {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+    }
+  </style>
 </head>
 <body>
-<div class="code-bg"></div>
-<div class="code-rain"></div>
+  <div class="code-bg"></div>
+  <div class="code-rain"></div>
 
-<header>
-<nav class="nav">
-<div class="logo">
-<div class="logo-mark">FE</div>
-<div class="logo-text">
-<span>Front End</span>
-<span>Simplified</span>
-</div>
-</div>
-<div class="nav-links">
-<a href="#why">Why us</a>
-<a href="#how">How it works</a>
-<a href="#curriculum">Curriculum</a>
-<a href="#success">Success stories</a>
-</div>
-<div class="nav-cta">
-<button class="btn btn-ghost">Login</button>
-<a href="#apply" class="btn btn-primary">Enroll now</a>
-</div>
-</nav>
-</header>
+  <header>
+    <nav class="nav">
+      <div class="logo">
+        <div class="logo-mark">FE</div>
+        <div class="logo-text">
+          <span>Front End</span>
+          <span>Simplified</span>
+        </div>
+      </div>
+      <div class="nav-links">
+        <a href="#why">Why us</a>
+        <a href="#how">How it works</a>
+        <a href="#curriculum">Curriculum</a>
+        <a href="#success">Success stories</a>
+      </div>
+      <div class="nav-cta">
+        <button class="btn btn-ghost">Login</button>
+        <a href="#apply" class="btn btn-primary">Enroll now</a>
+      </div>
+    </nav>
+  </header>
 
-<main>
-<section class="hero">
-<div>
-<div class="hero-kicker">
-<span class="hero-kicker-pill">Coding made easy</span>
-<span>No experience required</span>
-</div>
-<h1 class="hero-title">
-Learn to code.<br />
-<span>Launch your tech career.</span>
-</h1>
-<p class="hero-subtitle">
-Front End Simplified is a coding school that makes learning feel simple, structured,
-and actually fun—while giving you real support to land your first job.
-</p>
+  <main>
+    <section class="hero">
+      <div>
+        <div class="hero-kicker">
+          <span class="hero-kicker-pill">Coding made easy</span>
+          <span>No experience required</span>
+        </div>
+        <h1 class="hero-title">
+          Learn to code.<br />
+          <span>Launch your tech career.</span>
+        </h1>
+        <p class="hero-subtitle">
+          Front End Simplified is a coding school that makes learning feel simple, structured,
+          and actually fun—while giving you real support to land your first job.
+        </p>
 
-<div class="hero-badges">
-<div class="hero-badge">Beginner‑friendly</div>
-<div class="hero-badge">Hands‑on projects</div>
-<div class="hero-badge">Job placement support</div>
-</div>
+        <div class="hero-badges">
+          <div class="hero-badge">Beginner‑friendly</div>
+          <div class="hero-badge">Hands‑on projects</div>
+          <div class="hero-badge">Job placement support</div>
+        </div>
 
-<div class="hero-actions">
-<a href="#apply" class="btn btn-primary">
-Start learning today
-<span>→</span>
-</a>
-<a href="#how" class="btn btn-ghost">See how it works</a>
-</div>
-<p class="hero-note">
-<span>100% online</span> • Live support • Learn at your own pace
-</p>
-</div>
+        <div class="hero-actions">
+          <a href="#apply" class="btn btn-primary">
+            Start learning today
+            <span>→</span>
+          </a>
+          <a href="#how" class="btn btn-ghost">See how it works</a>
+        </div>
+        <p class="hero-note">
+          <span>100% online</span> • Live support • Learn at your own pace
+        </p>
+      </div>
 
-<div class="hero-right">
-<div class="hero-card">
-<div class="hero-card-header">
-<div class="hero-dots">
-<div class="hero-dot"></div>
-<div class="hero-dot"></div>
-<div class="hero-dot"></div>
-</div>
-<span>student@frontend-simplified:~</span>
-</div>
-<div class="hero-terminal">
-<div class="hero-terminal-line">
-<span class="prompt">➜</span>
-<span class="path"> ~/frontend-simplified</span>
-<span class="cmd"> npm run start-career</span>
-</div>
-<div class="hero-terminal-line">
-<span class="output">✔ HTML, CSS, JavaScript loaded</span>
-</div>
-<div class="hero-terminal-line">
-<span class="output">✔ Portfolio projects compiled</span>
-</div>
-<div class="hero-terminal-line">
-<span class="output">✔ Interview prep & job support ready</span>
-</div>
-<div class="hero-terminal-line">
-<span class="output">Launching: <span style="color: var(--accent);">Your first dev job</span></span
-><span class="cursor"></span>
-</div>
-</div>
-</div>
+      <div class="hero-right">
+        <div class="hero-card">
+          <div class="hero-card-header">
+            <div class="hero-dots">
+              <div class="hero-dot"></div>
+              <div class="hero-dot"></div>
+              <div class="hero-dot"></div>
+            </div>
+            <span>student@frontend-simplified:~</span>
+          </div>
+          <div class="hero-terminal">
+            <div class="hero-terminal-line">
+              <span class="prompt">➜</span>
+              <span class="path"> ~/frontend-simplified</span>
+              <span class="cmd"> npm run start-career</span>
+            </div>
+            <div class="hero-terminal-line">
+              <span class="output">✔ HTML, CSS, JavaScript loaded</span>
+            </div>
+            <div class="hero-terminal-line">
+              <span class="output">✔ Portfolio projects compiled</span>
+            </div>
+            <div class="hero-terminal-line">
+              <span class="output">✔ Interview prep & job support ready</span>
+            </div>
+            <div class="hero-terminal-line">
+              <span class="output">Launching: <span style="color: var(--accent);">Your first dev job</span></span>
+              <span class="cursor"></span>
+            </div>
+          </div>
+        </div>
 
-<div class="hero-floating-tag">
-<span class="icon">★</span>
-<span>“I went from zero to hired in 6 months.”</span>
-</div>
-</div>
-</section>
+        <div class="hero-floating-tag">
+          <span class="icon">★</span>
+          <span>"I went from zero to hired in 6 months."</span>
+        </div>
+      </div>
+    </section>
 
-<section id="why">
-<div class="section-label">Why front end simplified</div>
-<h2 class="section-title">We make coding feel simple—even if you’re starting from zero.</h2>
-<p class="section-subtitle">
-No confusing jargon. No endless tutorials. Just a clear path, real projects, and support
-at every step.
-</p>
+    <section id="why">
+      <div class="section-label">Why front end simplified</div>
+      <h2 class="section-title">We make coding feel simple—even if you're starting from zero.</h2>
+      <p class="section-subtitle">
+        No confusing jargon. No endless tutorials. Just a clear path, real projects, and support
+        at every step.
+      </p>
 
-<div class="grid-3">
-<div class="card">
-<div class="card-header">
-<div class="card-icon">🧩</div>
-<div class="card-title">Beginner‑friendly lessons</div>
-</div>
-<div class="card-body">
-We break down complex concepts into small, easy‑to‑digest lessons so you never feel
-lost or stuck.
-</div>
-</div>
+      <div class="grid-3">
+        <div class="card">
+          <div class="card-header">
+            <div class="card-icon">🧩</div>
+            <div class="card-title">Beginner‑friendly lessons</div>
+          </div>
+          <div class="card-body">
+            We break down complex concepts into small, easy‑to‑digest lessons so you never feel
+            lost or stuck.
+          </div>
+        </div>
 
-<div class="card">
-<div class="card-header">
-<div class="card-icon">🛠</div>
-<div class="card-title">Learn by building</div>
-</div>
-<div class="card-body">
-You’ll build real‑world projects that actually belong in a portfolio—not just “to‑do
-lists” and theory.
-</div>
-</div>
+        <div class="card">
+          <div class="card-header">
+            <div class="card-icon">🛠</div>
+            <div class="card-title">Learn by building</div>
+          </div>
+          <div class="card-body">
+            You'll build real‑world projects that actually belong in a portfolio—not just "to‑do
+            lists" and theory.
+          </div>
+        </div>
 
-<div class="card">
-<div class="card-header">
-<div class="card-icon">🤝</div>
-<div class="card-title">You’re not alone</div>
-</div>
-<div class="card-body">
-Get guidance, feedback, and accountability so you keep moving forward—even when life
-gets busy.
-</div>
-</div>
-</div>
-</section>
+        <div class="card">
+          <div class="card-header">
+            <div class="card-icon">🤝</div>
+            <div class="card-title">You're not alone</div>
+          </div>
+          <div class="card-body">
+            Get guidance, feedback, and accountability so you keep moving forward—even when life
+            gets busy.
+          </div>
+        </div>
+      </div>
+    </section>
 
-<section id="how">
-<div class="section-label">How it works</div>
-<h2 class="section-title">A simple 3‑step path from “I don’t get it” to “I got hired.”</h2>
-<p class="section-subtitle">
-We designed Front End Simplified to remove the guesswork. Follow the roadmap, do the
-work, and we’ll help you get job‑ready.
-</p>
+    <section id="how">
+      <div class="section-label">How it works</div>
+      <h2 class="section-title">A simple 3‑step path from "I don't get it" to "I got hired."</h2>
+      <p class="section-subtitle">
+        We designed Front End Simplified to remove the guesswork. Follow the roadmap, do the
+        work, and we'll help you get job‑ready.
+      </p>
 
-<div class="steps">
-<div class="step">
-<div class="step-number">Step 1</div>
-<div class="step-title">Learn the foundations</div>
-<p>
-Master HTML, CSS, and JavaScript with beginner‑friendly lessons, live demos, and
-guided practice.
-</p>
-<div class="tag-row">
-<span class="tag">No prior experience needed</span>
-<span class="tag">Short, focused lessons</span>
-</div>
-</div>
+      <div class="steps">
+        <div class="step">
+          <div class="step-number">Step 1</div>
+          <div class="step-title">Learn the foundations</div>
+          <p>
+            Master HTML, CSS, and JavaScript with beginner‑friendly lessons, live demos, and
+            guided practice.
+          </p>
+          <div class="tag-row">
+            <span class="tag">No prior experience needed</span>
+            <span class="tag">Short, focused lessons</span>
+          </div>
+        </div>
 
-<div class="step">
-<div class="step-number">Step 2</div>
-<div class="step-title">Build real projects</div>
-<p>
-Create responsive websites, interactive UIs, and a portfolio that shows employers
-what you can do.
-</p>
-<div class="tag-row">
-<span class="tag">Portfolio‑ready work</span>
-<span class="tag">Modern front‑end stack</span>
-</div>
-</div>
+        <div class="step">
+          <div class="step-number">Step 2</div>
+          <div class="step-title">Build real projects</div>
+          <p>
+            Create responsive websites, interactive UIs, and a portfolio that shows employers
+            what you can do.
+          </p>
+          <div class="tag-row">
+            <span class="tag">Portfolio‑ready work</span>
+            <span class="tag">Modern front‑end stack</span>
+          </div>
+        </div>
 
-<div class="step">
-<div class="step-number">Step 3</div>
-<div class="step-title">Get job‑ready</div>
-<p>
-Get help with resumes, LinkedIn, interviews, and applications—plus ongoing support
-as you apply.
-</p>
-<div class="tag-row">
-<span class="tag">Job placement support</span>
-<span class="tag">Interview prep</span>
-</div>
-</div>
-</div>
-</section>
+        <div class="step">
+          <div class="step-number">Step 3</div>
+          <div class="step-title">Get job‑ready</div>
+          <p>
+            Get help with resumes, LinkedIn, interviews, and applications—plus ongoing support
+            as you apply.
+          </p>
+          <div class="tag-row">
+            <span class="tag">Job placement support</span>
+            <span class="tag">Interview prep</span>
+          </div>
+        </div>
+      </div>
+    </section>
 
-<section id="success">
-<div class="section-label">Student success</div>
-<h2 class="section-title">Real people. Real career changes.</h2>
-<p class="section-subtitle">
-Our students started where you are now—unsure, curious, and wondering if they could
-really do this. They did. So can you.
-</p>
+    <section id="success">
+      <div class="section-label">Student success</div>
+      <h2 class="section-title">Real people. Real career changes.</h2>
+      <p class="section-subtitle">
+        Our students started where you are now—unsure, curious, and wondering if they could
+        really do this. They did. So can you.
+      </p>
 
-<div class="testimonials">
-<div class="testimonial">
-<div class="testimonial-name">Alex M.</div>
-<div class="testimonial-role">Front‑End Developer @ Startup</div>
-<p>
-“I tried learning from YouTube for years. Front End Simplified finally gave me a
-clear path—and the accountability to finish.”
-</p>
-<div class="testimonial-tag">Hired in 6 months</div>
-</div>
+      <div class="testimonials">
+        <div class="testimonial">
+          <div class="testimonial-name">Alex M.</div>
+          <div class="testimonial-role">Front‑End Developer @ Startup</div>
+          <p>
+            "I tried learning from YouTube for years. Front End Simplified finally gave me a
+            clear path—and the accountability to finish."
+          </p>
+          <div class="testimonial-tag">Hired in 6 months</div>
+        </div>
 
-<div class="testimonial">
-<div class="testimonial-name">Jordan R.</div>
-<div class="testimonial-role">Junior Engineer @ Agency</div>
-<p>
-“The projects we built in the course became my portfolio. Recruiters actually
-commented on them in interviews.”
-</p>
-<div class="testimonial-tag">From retail to tech</div>
-</div>
+        <div class="testimonial">
+          <div class="testimonial-name">Jordan R.</div>
+          <div class="testimonial-role">Junior Engineer @ Agency</div>
+          <p>
+            "The projects we built in the course became my portfolio. Recruiters actually
+            commented on them in interviews."
+          </p>
+          <div class="testimonial-tag">From retail to tech</div>
+        </div>
 
-<div class="testimonial">
-<div class="testimonial-name">Taylor S.</div>
-<div class="testimonial-role">UI Developer @ SaaS Company</div>
-<p>
-“The job prep section was huge—mock interviews, feedback on my resume, and help
-with what to say to hiring managers.”
-</p>
-<div class="testimonial-tag">Multiple offers</div>
-</div>
-</div>
-</section>
+        <div class="testimonial">
+          <div class="testimonial-name">Taylor S.</div>
+          <div class="testimonial-role">UI Developer @ SaaS Company</div>
+          <p>
+            "The job prep section was huge—mock interviews, feedback on my resume, and help
+            with what to say to hiring managers."
+          </p>
+          <div class="testimonial-tag">Multiple offers</div>
+        </div>
+      </div>
+    </section>
 
-<section id="curriculum">
-<div class="section-label">Curriculum</div>
-<h2 class="section-title">Everything you need to become a front‑end developer.</h2>
-<p class="section-subtitle">
-No fluff. Just the skills that actually matter in real front‑end jobs—taught in a way
-that makes sense.
-</p>
+    <section id="curriculum">
+      <div class="section-label">Curriculum</div>
+      <h2 class="section-title">Everything you need to become a front‑end developer.</h2>
+      <p class="section-subtitle">
+        No fluff. Just the skills that actually matter in real front‑end jobs—taught in a way
+        that makes sense.
+      </p>
 
-<div class="curriculum-grid">
-<div class="curriculum-item">
-<div class="curriculum-title">HTML & CSS</div>
-<p>Structure, layout, responsive design, and modern CSS techniques.</p>
-</div>
-<div class="curriculum-item">
-<div class="curriculum-title">JavaScript</div>
-<p>Core JS concepts, DOM, APIs, and interactive UI patterns.</p>
-</div>
-<div class="curriculum-item">
-<div class="curriculum-title">React basics</div>
-<p>Components, props, state, and building modern front‑end apps.</p>
-</div>
-<div class="curriculum-item">
-<div class="curriculum-title">Git & GitHub</div>
-<p>Version control, collaboration, and shipping your work.</p>
-</div>
-<div class="curriculum-item">
-<div class="curriculum-title">Portfolio building</div>
-<p>Turn your projects into a clean, professional portfolio.</p>
-</div>
-<div class="curriculum-item">
-<div class="curriculum-title">Career prep</div>
-<p>Resumes, LinkedIn, networking, and interview practice.</p>
-</div>
-</div>
-</section>
+      <div class="curriculum-grid">
+        <div class="curriculum-item">
+          <div class="curriculum-title">HTML & CSS</div>
+          <p>Structure, layout, responsive design, and modern CSS techniques.</p>
+        </div>
+        <div class="curriculum-item">
+          <div class="curriculum-title">JavaScript</div>
+          <p>Core JS concepts, DOM, APIs, and interactive UI patterns.</p>
+        </div>
+        <div class="curriculum-item">
+          <div class="curriculum-title">React basics</div>
+          <p>Components, props, state, and building modern front‑end apps.</p>
+        </div>
+        <div class="curriculum-item">
+          <div class="curriculum-title">Git & GitHub</div>
+          <p>Version control, collaboration, and shipping your work.</p>
+        </div>
+        <div class="curriculum-item">
+          <div class="curriculum-title">Portfolio building</div>
+          <p>Turn your projects into a clean, professional portfolio.</p>
+        </div>
+        <div class="curriculum-item">
+          <div class="curriculum-title">Career prep</div>
+          <p>Resumes, LinkedIn, networking, and interview practice.</p>
+        </div>
+      </div>
+    </section>
 
-<section id="apply" class="cta-section">
-<div class="pill" style="margin-bottom: 8px;">
-<span class="pill-dot"></span>
-<span>Coding made easy • Front End Simplified</span>
-</div>
-<h2 class="cta-title">Ready to start your tech career?</h2>
-<p class="cta-subtitle">
-Join Front End Simplified and follow a clear, supportive path from beginner to
-job‑ready front‑end developer.
-</p>
-<div class="cta-actions">
-<a href="#enroll-form" class="btn btn-primary">Apply now</a>
-<a href="#call-form" class="btn btn-ghost">Book a free info call</a>
-</div>
-<p class="cta-note">No degree required • Learn at your own pace • Lifetime access to content</p>
-</section>
+    <section id="apply" class="cta-section">
+      <div class="pill" style="margin-bottom: 8px;">
+        <span class="pill-dot"></span>
+        <span>Coding made easy • Front End Simplified</span>
+      </div>
+      <h2 class="cta-title">Ready to start your tech career?</h2>
+      <p class="cta-subtitle">
+        Join Front End Simplified and follow a clear, supportive path from beginner to
+        job‑ready front‑end developer.
+      </p>
+      <div class="cta-actions">
+        <a href="#enroll-form" class="btn btn-primary">Apply now</a>
+        <a href="#call-form" class="btn btn-ghost">Book a free info call</a>
+      </div>
+      <p class="cta-note">No degree required • Learn at your own pace • Lifetime access to content</p>
+    </section>
 
-<section id="enroll-form" style="margin-top:40px;">
-<div class="section-label">Enrollment</div>
-<h2 class="section-title">Join Front End Simplified</h2>
-<p class="section-subtitle">Fill out the form below and our team will reach out.</p>
+    <section id="enroll-form" style="margin-top:40px;">
+      <div class="section-label">Enrollment</div>
+      <h2 class="section-title">Join Front End Simplified</h2>
+      <p class="section-subtitle">Fill out the form below and our team will reach out.</p>
 
-<form id="fes-enroll" class="card" style="padding:20px;">
-<label>Name</label>
-<input name="name" required style="width:100%;margin-bottom:10px;padding:8px;border-radius:6px;">
+      <form id="fes-enroll" class="card" style="padding:20px;">
+        <label>Name</label>
+        <input name="name" required style="width:100%;margin-bottom:10px;padding:8px;border-radius:6px;">
 
-<label>Email</label>
-<input name="email" type="email" required style="width:100%;margin-bottom:10px;padding:8px;border-radius:6px;">
+        <label>Email</label>
+        <input name="email" type="email" required style="width:100%;margin-bottom:10px;padding:8px;border-radius:6px;">
 
-<label>Phone</label>
-<input name="phone" required style="width:100%;margin-bottom:10px;padding:8px;border-radius:6px;">
+        <label>Phone</label>
+        <input name="phone" required style="width:100%;margin-bottom:10px;padding:8px;border-radius:6px;">
 
-<label>Experience Level</label>
-<select name="experience" required style="width:100%;margin-bottom:10px;padding:8px;border-radius:6px;">
-<option>Complete Beginner</option>
-<option>Some Experience</option>
-<option>Advanced</option>
-</select>
+        <label>Experience Level</label>
+        <select name="experience" required style="width:100%;margin-bottom:10px;padding:8px;border-radius:6px;">
+          <option>Complete Beginner</option>
+          <option>Some Experience</option>
+          <option>Advanced</option>
+        </select>
 
-<label>Why do you want to learn coding?</label>
-<textarea name="reason" rows="4" required style="width:100%;margin-bottom:14px;padding:8px;border-radius:6px;"></textarea>
+        <label>Why do you want to learn coding?</label>
+        <textarea name="reason" rows="4" required style="width:100%;margin-bottom:14px;padding:8px;border-radius:6px;"></textarea>
 
-<button class="btn btn-primary" type="submit">Submit Enrollment</button>
-</form>
-</section>
+        <button class="btn btn-primary" type="submit">Submit Enrollment</button>
+      </form>
+    </section>
 
-<section id="call-form" style="margin-top:40px;">
-<div class="section-label">Book a Call</div>
-<h2 class="section-title">Talk With Our Team</h2>
-<p class="section-subtitle">Ask questions, get guidance, and see if FES is right for you.</p>
+    <section id="call-form" style="margin-top:40px;">
+      <div class="section-label">Book a Call</div>
+      <h2 class="section-title">Talk With Our Team</h2>
+      <p class="section-subtitle">Ask questions, get guidance, and see if FES is right for you.</p>
 
-<form id="fes-call" class="card" style="padding:20px;">
-<label>Name</label>
-<input name="name" required style="width:100%;margin-bottom:10px;padding:8px;border-radius:6px;">
+      <form id="fes-call" class="card" style="padding:20px;">
+        <label>Name</label>
+        <input name="name" required style="width:100%;margin-bottom:10px;padding:8px;border-radius:6px;">
 
-<label>Email</label>
-<input name="email" type="email" required style="width:100%;margin-bottom:10px;padding:8px;border-radius:6px;">
+        <label>Email</label>
+        <input name="email" type="email" required style="width:100%;margin-bottom:10px;padding:8px;border-radius:6px;">
 
-<label>Preferred Time</label>
-<input name="time" type="datetime-local" required style="width:100%;margin-bottom:10px;padding:8px;border-radius:6px;">
+        <label>Preferred Time</label>
+        <input name="time" type="datetime-local" required style="width:100%;margin-bottom:10px;padding:8px;border-radius:6px;">
 
-<label>Questions</label>
-<textarea name="questions" rows="4" style="width:100%;margin-bottom:14px;padding:8px;border-radius:6px;"></textarea>
+        <label>Questions</label>
+        <textarea name="questions" rows="4" style="width:100%;margin-bottom:14px;padding:8px;border-radius:6px;"></textarea>
 
-<button class="btn btn-primary" type="submit">Book Call</button>
-</form>
-</section>
+        <button class="btn btn-primary" type="submit">Book Call</button>
+      </form>
+    </section>
 
-<section id="contact-form" style="margin-top:40px;">
-<div class="section-label">Contact</div>
-<h2 class="section-title">Get in Touch</h2>
-<p class="section-subtitle">Have questions? We’re here to help.</p>
+    <section id="contact-form" style="margin-top:40px;">
+      <div class="section-label">Contact</div>
+      <h2 class="section-title">Get in Touch</h2>
+      <p class="section-subtitle">Have questions? We're here to help.</p>
 
-<form id="fes-contact" class="card" style="padding:20px;">
-<label>Name</label>
-<input name="name" required style="width:100%;margin-bottom:10px;padding:8px;border-radius:6px;">
+      <form id="fes-contact" class="card" style="padding:20px;">
+        <label>Name</label>
+        <input name="name" required style="width:100%;margin-bottom:10px;padding:8px;border-radius:6px;">
 
-<label>Email</label>
-<input name="email" type="email" required style="width:100%;margin-bottom:10px;padding:8px;border-radius:6px;">
+        <label>Email</label>
+        <input name="email" type="email" required style="width:100%;margin-bottom:10px;padding:8px;border-radius:6px;">
 
-<label>Message</label>
-<textarea name="message" rows="4" required style="width:100%;margin-bottom:14px;padding:8px;border-radius:6px;"></textarea>
+        <label>Message</label>
+        <textarea name="message" rows="4" required style="width:100%;margin-bottom:14px;padding:8px;border-radius:6px;"></textarea>
 
-<button class="btn btn-primary" type="submit">Send Message</button>
-</form>
-</section>
-</main>
+        <button class="btn btn-primary" type="submit">Send Message</button>
+      </form>
+    </section>
+  </main>
 
-<footer>
-<span>© <span id="year"></span> Front End Simplified. All rights reserved.</span>
-<span>
-<a href="#">Terms</a> • <a href="#">Privacy</a>
-</span>
-</footer>
+  <footer>
+    <span>© <span id="year"></span> Front End Simplified. All rights reserved.</span>
+    <span>
+      <a href="#">Terms</a> • <a href="#">Privacy</a>
+    </span>
+  </footer>
 
-<div id="success-popup" class="success-popup">
-<div class="success-checkmark">
-<div class="check-icon"></div>
-</div>
-<p>Form sent successfully!</p>
-</div>
+  <div id="success-popup" class="success-popup">
+    <div class="success-checkmark">
+      <div class="check-icon"></div>
+    </div>
+    <p>Form sent successfully!</p>
+  </div>
 
-<audio id="success-sound" src="success.mp3" preload="auto"></audio>
-<audio id="typing-sound" src="typing.mp3" preload="auto"></audio>
-<audio id="hover-sound" src="hover.mp3" preload="auto"></audio>
-<audio id="ambient-sound" src="ambient.mp3" preload="auto" loop></audio>
+  <audio id="success-sound" src="success.mp3" preload="auto"></audio>
+  <audio id="typing-sound" src="typing.mp3" preload="auto"></audio>
+  <audio id="hover-sound" src="hover.mp3" preload="auto"></audio>
+  <audio id="ambient-sound" src="ambient.mp3" preload="auto" loop></audio>
 
-<script>
-document.getElementById("year").textContent = new Date().getFullYear();
+  <script>
+    document.getElementById("year").textContent = new Date().getFullYear();
 
-function playTyping() {
-const typing = document.getElementById("typing-sound");
-typing.currentTime = 0;
-typing.play();
-}
+    function playTyping() {
+      const typing = document.getElementById("typing-sound");
+      typing.currentTime = 0;
+      typing.play();
+    }
 
-function stopTyping() {
-const typing = document.getElementById("typing-sound");
-typing.pause();
-typing.currentTime = 0;
-}
+    function stopTyping() {
+      const typing = document.getElementById("typing-sound");
+      typing.pause();
+      typing.currentTime = 0;
+    }
 
-function showSuccess() {
-stopTyping();
+    function showSuccess() {
+      stopTyping();
 
-const popup = document.getElementById("success-popup");
-const sound = document.getElementById("success-sound");
+      const popup = document.getElementById("success-popup");
+      const sound = document.getElementById("success-sound");
 
-sound.currentTime = 0;
-sound.play();
+      sound.currentTime = 0;
+      sound.play();
 
-popup.classList.add("show");
+      popup.classList.add("show");
 
-setTimeout(() => {
-popup.classList.remove("show");
-}, 2200);
-}
+      setTimeout(() => {
+        popup.classList.remove("show");
+      }, 2200);
+    }
 
-async function wireForm(formId) {
-const form = document.getElementById(formId);
+    async function wireForm(formId) {
+      const form = document.getElementById(formId);
 
-form.addEventListener("submit", async (e) => {
-e.preventDefault();
+      form.addEventListener("submit", async (e) => {
+        e.preventDefault();
 
-playTyping();
+        playTyping();
 
-const data = Object.fromEntries(new FormData(form).entries());
+        const data = Object.fromEntries(new FormData(form).entries());
 
-await fetch("https://formsubmit.co/info@frontendsimplified.com", {
-method: "POST",
-headers: { "Content-Type": "application/json" },
-body: JSON.stringify(data)
-});
+        await fetch("https://formsubmit.co/info@frontendsimplified.com", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(data)
+        });
 
-form.reset();
-showSuccess();
-});
-}
+        form.reset();
+        showSuccess();
+      });
+    }
 
-wireForm("fes-enroll");
-wireForm("fes-call");
-wireForm("fes-contact");
+    wireForm("fes-enroll");
+    wireForm("fes-call");
+    wireForm("fes-contact");
 
-const hoverSound = document.getElementById("hover-sound");
+    const hoverSound = document.getElementById("hover-sound");
 
-document.querySelectorAll(".btn, .nav-links a").forEach((el) => {
-el.addEventListener("mouseenter", () => {
-hoverSound.currentTime = 0;
-hoverSound.play();
-});
-});
+    document.querySelectorAll(".btn, .nav-links a").forEach((el) => {
+      el.addEventListener("mouseenter", () => {
+        hoverSound.currentTime = 0;
+        hoverSound.play();
+      });
+    });
 
-function startAmbientSound() {
-const ambient = document.getElementById("ambient-sound");
-ambient.volume = 0.25;
-ambient.play();
-window.removeEventListener("click", startAmbientSound);
-window.removeEventListener("mousemove", startAmbientSound);
-window.removeEventListener("touchstart", startAmbientSound);
-}
+    function startAmbientSound() {
+      const ambient = document.getElementById("ambient-sound");
+      ambient.volume = 0.25;
+      ambient.play();
+      window.removeEventListener("click", startAmbientSound);
+      window.removeEventListener("mousemove", startAmbientSound);
+      window.removeEventListener("touchstart", startAmbientSound);
+    }
 
-window.addEventListener("click", startAmbientSound);
-window.addEventListener("mousemove", startAmbientSound);
-window.addEventListener("touchstart", startAmbientSound);
-</script>
+    window.addEventListener("click", startAmbientSound);
+    window.addEventListener("mousemove", startAmbientSound);
+    window.addEventListener("touchstart", startAmbientSound);
+  </script>
 </body>
 </html>
